@@ -27,4 +27,13 @@ public class TodoListService
         //string url = "https://krdo-todo.azurewebsites.net/api/tasks/";
         return await http.GetFromJsonAsync<TodoListTask[]>(url);
     }
+     private string? newItemName;
+
+    private async Task AddItem()
+    {
+        var addItem = new TodoListTask { Text = newItemName, Done = false };
+         string url = $"{baseAPI}tasks/";
+        //string url = "https://krdo-todo.azurewebsites.net/api/tasks/";
+        await http.PostAsJsonAsync(url, addItem);
+    }
 }

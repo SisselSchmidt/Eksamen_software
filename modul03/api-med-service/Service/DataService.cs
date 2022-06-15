@@ -31,5 +31,28 @@ public class DataService
         data.Add(task);
         return JsonSerializer.Serialize(new { msg = "New task created", newTask = task });
     }
-    
+
+    public string DeleteTaskById(int id) {
+        var task = GetTaskById(id);
+        if (task is null)
+            return "Task not found";
+        data.Remove(task);
+            return "Task deleted";
+            
+
+    }
+     public TodoTask GetTaskByDone(bool done) {
+        return data.Find(task => task.Done == done);
+    }
+
+    //public List<bool> GetTaskByDone(bool Done)
+   // {
+     //   List<bool> result = new ();
+     //   foreach (TodoTask task in data) 
+      //  {
+        //    if (task.Done == Done)
+       // result.Add(task.Done);
+       // }
+       // return result;
+    //}
 }

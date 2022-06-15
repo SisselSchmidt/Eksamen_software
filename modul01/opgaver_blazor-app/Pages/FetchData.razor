@@ -36,7 +36,10 @@ else
     </table>
 }
 
-@code {
+
+
+@code 
+{
     private TodoListTask[]? tasks;
 
     protected override async Task OnInitializedAsync()
@@ -46,4 +49,6 @@ else
 
         tasks = await service.GetTodoListTasks();
     }
+
+   
 }

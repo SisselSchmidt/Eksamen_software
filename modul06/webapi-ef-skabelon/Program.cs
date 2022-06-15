@@ -99,6 +99,11 @@ app.MapPost("/api/tasks/", (TaskData data, DataService service) =>
     return service.CreateTask(data.text, data.done, data.userId);
 });
 
+app.MapDelete("/api/tasks/{id}", (DataService service, int id) =>
+{
+    service.DeleteTask(id);
+});
+
 app.MapGet("/api/users", (DataService service) =>
 {
     return service.GetUsers();
@@ -108,6 +113,14 @@ app.MapPost("/api/users/", (UserData data, DataService service) =>
 {
     return service.CreateUser(data.name);
 });
+
+app.MapDelete("/api/users/{id}", (DataService service, int id) =>
+{
+    service.DeleteUser(id);
+});
+
+
+
 
 app.Run();
 

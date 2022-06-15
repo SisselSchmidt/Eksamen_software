@@ -69,11 +69,36 @@ public class HashSetChaining : HashSet
         return !found;
     }
 
-    public bool Remove(Object x)
-    {
-        // TODO: Implement!
-        // SKal returnerer true hvis den finder noget at fjerne
-        return false;
+      /**
+     * Removes an object from this set.
+     * @param x an object
+     * @return true if x was removed from this set, false if x was not an element of this set
+     */
+    public bool Remove(Object x) {
+        	    int h = HashValue(x);
+
+        Node current = buckets[h];
+        Node previous = null!;
+        bool found = false;
+        while (!found && current != null) {
+            if (current.Data.Equals(x)) {
+                found = true;
+            } else {
+                previous = current;
+                current = current.Next;
+            }
+        }
+        
+        if (found) {
+            if (previous != null) {
+                previous.Next = current.Next;
+            } else {
+                buckets[h] = buckets[h].Next;
+            }
+            currentSize--;
+        }
+        
+		return found;
     }
 
     private int HashValue(Object x)

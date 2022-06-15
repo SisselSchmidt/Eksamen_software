@@ -61,6 +61,17 @@ public class DataService
         );
     }
 
+    public void DeleteTask(int id) {
+        var task = db
+            .Tasks
+            .Where(task => task.TodoTaskId == id)
+            .First();
+        db.Tasks.Remove(task);
+        db.SaveChanges();
+         
+    }
+        
+
     public DbSet<User> GetUsers() {
         return db.Users;
     }
@@ -71,5 +82,15 @@ public class DataService
         db.SaveChanges();
         return JsonSerializer.Serialize(
             new { msg = "New user created", newUser = user });
+    }
+
+    public void DeleteUser(int id) {
+        var user = db
+            .Users
+            .Where(user => user.UserId == id)
+            .First();
+        db.Users.Remove(user);
+        db.SaveChanges();
+         
     }
 }

@@ -59,6 +59,16 @@ app.MapPost("/api/tasks/", (TaskData data, DataService service) =>
     return service.CreateTask(data.text, data.done);
 });
 
+app.MapDelete("/api/tasks/{id}", (DataService service, int id) =>
+{
+    return service.DeleteTaskById(id);
+});
+
+app.MapGet("/api/task/{done}", (DataService service, bool done) =>
+{
+    return service.GetTaskByDone(done);
+});
+
 app.Run();
 
 record TaskData(string text, bool done);
